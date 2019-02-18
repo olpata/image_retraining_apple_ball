@@ -1,15 +1,37 @@
-**NOTE: This code has moved to**
-https://github.com/tensorflow/hub/tree/master/examples/image_retraining
+aticle:
+https://robopress.robotsandpencils.com/build-your-own-image-classifier-in-less-time-than-it-takes-to-bake-a-pizza-9a7b898264de
+https://www.tensorflow.org/hub/tutorials/image_retraining
 
-retrain.py is an example script that shows how one can adapt a pretrained
-network for other classification problems (including use with TFLite and
-quantization).
 
-As of TensorFlow 1.7, it is recommended to use a pretrained network from
-TensorFlow Hub, using the new version of this example found in the location
-above, as explained in TensorFlow's revised [image retraining
-tutorial](https://www.tensorflow.org/tutorials/image_retraining).
 
-Older versions of this example (using frozen GraphDefs instead of
-TensorFlow Hub modules) are available in the release branches of
-TensorFlow versions up to and including 1.7.
+prerequered:
+python 3.6 (+ pip)
+
+install:
+pip install numpy
+pip install tensorflow
+pip install tensorflow_hub
+
+add images:
+training_data
+-Red Apple
+--xxxx
+--xxxx
+--xxxx
+-Red Ball
+--xxxx
+--xxxx
+--xxxx
+test_data
+--xxxx
+--xxxx
+--xxxx
+
+run:
+python retrain.py --how_many_training_steps 500 -- output_graph=./retrained_graph.pb --output_labels=./retrained_labels.txt --image_dir=./training_data
+
+
+
+python label_image.py --graph=./retrained_graph.pb --labels=./retrained_labels.txt --input_layer=Placeholder --output_layer=final_result --image=E:/workspace/cnn/tensorflow_test1/tensorflow/examples/image_retraining/test_data/ra101.jpg
+
+python label_image_V2.py --graph=./retrained_graph.pb --labels=./retrained_labels.txt --input_layer=Placeholder --output_layer=final_result --image_dir=E:/workspace/cnn/test_data
